@@ -1,9 +1,10 @@
-Reconocimiento de Voz con ESP32 y TensorFlow Lite Micro
+Reconocimiento de Voz con ESP32 y TensorFlow Lite Micro:
+
 Este proyecto implementa un sistema de reconocimiento de voz en tiempo real utilizando un microcontrolador ESP32-WROOM-32 y TensorFlow Lite Micro. El sistema permite entrenar un modelo con comandos de voz personalizados (por defecto: "adelante", "atras", "derecha", "izquierda" y "ruido") para controlar cuatro LEDs conectados a pines GPIO. El proyecto está optimizado para microcontroladores con recursos limitados y utiliza un modo de sueño profundo para reducir el consumo de energía.
 
 Tabla de Contenidos
 
-Requisitos
+Requisitos:
 Estructura del Proyecto
 Instrucciones de Uso
 Grabación de Audios
@@ -66,22 +67,15 @@ Objetivo: Grabar muestras de audio para entrenar el modelo.
 Instalar Dependencias:
 pip install sounddevice soundfile numpy
 
-
 Configurar audios.py:
-
 Define las palabras en PALABRAS = ["adelante", "atras", "izquierda", "derecha", "ruido"].
 Establece MUESTRAS_POR_PALABRA = 20.
 
-
 Grabar Audios:
-
 Ejecuta:python scripts/audios.py
-
 
 Pronuncia cada palabra 20 veces según las instrucciones en pantalla.
 Los audios se guardan en /data/palabra/palabra_i.wav.
-
-
 
 Nota: Graba en un entorno silencioso. Para "ruido", usa silencio o sonidos ambientales suaves.
 
@@ -91,11 +85,9 @@ Objetivo: Crear un modelo TensorFlow Lite Micro con los audios grabados.
 Instalar Dependencias:
 pip install tensorflow librosa scikit-learn numpy
 
-
 Configurar RedNeuronal_Español.py:
 
 Asegúrate de que CLASSES coincida con las palabras grabadas.
-
 
 Entrenar:
 
@@ -103,8 +95,6 @@ Ejecuta:python scripts/RedNeuronal_Español.py --dataset_path data --model_path 
 
 
 El modelo se guarda como modelo_comandos.tflite (<30 KB).
-
-
 
 Nota: Si la precisión es baja (<90%), graba más audios o ajusta el script.
 
@@ -115,22 +105,15 @@ Convertir el Modelo:
 
 Usa Git Bash para convertir el modelo a un array de bytes:xxd -i modelo/modelo_comandos.tflite > src/modelo_comandos_tflite.h
 
-
-
-
 Configurar main.cpp:
 
 Incluye el modelo con #include "modelo_comandos_tflite.h".
 Verifica que los pines coincidan con tu hardware.
 
-
 Compilar y Cargar:
 
 Usa PlatformIO para compilar y cargar el código.
 Monitorea el serial a 115200 baudios.
-
-
-
 
 Pruebas y Uso
 Objetivo: Validar el sistema.
