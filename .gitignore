@@ -1,0 +1,4 @@
+*.tflite
+*.pyc
+__pycache__/
+/data/
